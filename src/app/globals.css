@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* Paleta: verde da mata, azul do céu e da água, e brancos suaves. */
+@theme {
+  --color-mist: #f5f8f6;
+  --color-paper: #ffffff;
+  --color-line: #dfe7e2;
+  --color-sage: #e8efea;
+  --color-sage-deep: #a9bfae;
+  --color-leaf: #3d6b50;
+  --color-forest: #1d3a2e;
+  --color-forest-deep: #132a21;
+  --color-lake: #2a5b7a;
+  --color-lake-soft: #e3eef4;
+  --color-sky: #9cc3d8;
+  --color-ink: #17251e;
+  --color-muted: #5b6b62;
+  --color-whatsapp: #128c4b;
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), ui-serif, Georgia, serif;
+
+  --shadow-soft: 0 1px 2px rgb(23 37 30 / 0.04), 0 12px 32px -16px rgb(23 37 30 / 0.22);
+  --shadow-lift: 0 2px 6px rgb(23 37 30 / 0.06), 0 28px 50px -24px rgb(23 37 30 / 0.4);
+
+  --animate-rise: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@keyframes slow-zoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgb(18 140 75 / 0.45); }
+  70%, 100% { box-shadow: 0 0 0 14px rgb(18 140 75 / 0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    background: var(--color-mist);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-lake);
+    outline-offset: 3px;
+  }
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+  dialog::backdrop {
+    background: rgb(10 20 15 / 0.88);
+    backdrop-filter: blur(4px);
+  }
+  /* Âncoras do menu não ficam escondidas atrás do cabeçalho fixo. */
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+}
+
+@layer components {
+  /* Pequeno título acima das seções, com um traço. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-leaf);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+  /* Espaço reservado para foto: tom de mata e céu com linhas de relevo. */
+  .placeholder-photo {
+    background:
+      radial-gradient(120% 80% at 20% 0%, rgb(156 195 216 / 0.55), transparent 60%),
+      radial-gradient(90% 70% at 100% 100%, rgb(61 107 80 / 0.35), transparent 65%),
+      linear-gradient(160deg, #e9f1ee, #d6e5dc);
+  }
+  .placeholder-photo-dark {
+    background:
+      radial-gradient(90% 70% at 15% 10%, rgb(42 91 122 / 0.55), transparent 60%),
+      radial-gradient(80% 70% at 90% 90%, rgb(61 107 80 / 0.55), transparent 65%),
+      linear-gradient(170deg, #1d3a2e, #132a21);
+  }
+  .hero-zoom {
+    animation: slow-zoom 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .whatsapp-pulse {
+    animation: pulse-ring 2.6s ease-out infinite;
+  }
+  .lightbox-in {
+    animation: fade-in 0.25s ease-out both;
+  }
+  /* Entrada suave ao rolar (só quando o JavaScript está ativo). */
+  @media (scripting: enabled) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
