@@ -112,17 +112,60 @@ export function Header() {
   );
 }
 
-/** Botão flutuante do WhatsApp, sempre visível. */
+/**
+ * Botão flutuante do WhatsApp, sempre visível. No celular, depois da capa, vira uma barra
+ * fixa com "Consultar datas" e o WhatsApp lado a lado.
+ */
 export function WhatsappFlutuante() {
+  const [barra, setBarra] = useState(false);
+
+  useEffect(() => {
+    const aoRolar = () => setBarra(window.scrollY > window.innerHeight * 0.85);
+    aoRolar();
+    window.addEventListener("scroll", aoRolar, { passive: true });
+    return () => window.removeEventListener("scroll", aoRolar);
+  }, []);
+
   return (
-    <a
-      href={linkWhatsapp()}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Falar com o ${site.nome} pelo WhatsApp`}
-      className="whatsapp-pulse fixed right-4 bottom-4 z-30 grid size-15 place-items-center rounded-full bg-whatsapp text-white shadow-lift transition-transform hover:scale-105 sm:right-6 sm:bottom-6"
-    >
-      <WhatsappIcon className="size-8" />
-    </a>
+    <>
+      <a
+        href={linkWhatsapp()}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Falar com o ${site.nome} pelo WhatsApp`}
+        className={`whatsapp-pulse fixed right-4 bottom-4 z-30 place-items-center rounded-full bg-whatsapp text-white shadow-lift transition-transform hover:scale-105 sm:right-6 sm:bottom-6 sm:grid sm:size-15 ${
+          barra ? "hidden" : "grid size-15"
+        }`}
+      >
+        <WhatsappIcon className="size-8" />
+      </a>
+
+      <div
+        className={`fixed inset-x-0 bottom-0 z-30 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-transform duration-300 sm:hidden ${
+          barra ? "translate-y-0" : "translate-y-full"
+        }`}
+        aria-hidden={!barra}
+      >
+        <div className="flex items-center gap-2">
+          <a
+            href="#reservar"
+            tabIndex={barra ? 0 : -1}
+            className="flex min-h-12 flex-1 items-center justify-center rounded-full bg-forest text-sm font-bold tracking-[0.06em] text-white uppercase"
+          >
+            Consultar datas
+          </a>
+          <a
+            href={linkWhatsapp(site.mensagens.disponibilidade)}
+            target="_blank"
+            rel="noopener noreferrer"
+            tabIndex={barra ? 0 : -1}
+            aria-label="Consultar disponibilidade pelo WhatsApp"
+            className="grid size-12 shrink-0 place-items-center rounded-full bg-whatsapp text-white"
+          >
+            <WhatsappIcon className="size-6" />
+          </a>
+        </div>
+      </div>
+    </>
   );
 }

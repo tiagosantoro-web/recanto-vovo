@@ -33,9 +33,18 @@ export const site = {
     disponibilidade: "Olá! Vim pelo site do Recanto Vó Tereza e gostaria de consultar a disponibilidade de datas.",
   },
 
+  // Nota pública do Google Maps (vista em 23/11/2026: 5,0 com 5 avaliações).
+  // Atualize de vez em quando; null esconde o selo.
+  avaliacaoGoogle: { nota: "5,0", total: 5 } as { nota: string; total: number } | null,
+
+  // Distância aproximada até a capital (Mairinque fica a cerca de 70 km de São Paulo).
+  distanciaSP: "cerca de 70 km de São Paulo",
+
   // Endereço público do site (sem barra no final). Usado no Google e na prévia de links.
   siteUrl: "https://tiagosantoro-web.github.io/recanto-vo-tereza",
 };
+
+export const linkGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Recanto Vó Tereza, Mairinque - SP")}`;
 
 export function linkWhatsapp(mensagem: string = site.mensagens.geral): string {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(mensagem)}`;

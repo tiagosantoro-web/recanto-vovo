@@ -2,34 +2,43 @@
 
 Site de apresentação da chácara **Recanto Vó Tereza** (Rua Ayub Abib Riskallah, nº 38, Bairro Sebandilha, Mairinque – SP). O objetivo é apresentar o espaço e levar o visitante a consultar datas pelo WhatsApp.
 
-Página única, responsiva, com:
+Página única, responsiva, pensada para vender pelos olhos e converter no WhatsApp:
 
-1. **Capa** com foto de fundo, título, "Conheça nosso espaço" e "Consultar disponibilidade" (WhatsApp).
-2. **Conheça o Recanto**: texto e foto (Imagem 01).
-3. **Nosso espaço**: cards com hospedagem para até 20 pessoas, até 30 pessoas durante o dia, finais de semana, feriados e ambiente reservado.
-4. **Galeria** com 7 espaços de foto em mosaico; as fotos reais abrem ampliadas, com setas e teclado.
-5. **Capacidade e locação**: 20 pessoas para dormir e 30 para passar o dia, com "Consultar datas disponíveis".
-6. **Localização**: endereço, mapa do Google (o pino cai no próprio Recanto Vó Tereza) e "Abrir rota no Google Maps".
-7. **Contato e reservas**: botão grande do WhatsApp e link do Instagram.
-8. **Rodapé** com nome, endereço, WhatsApp, Instagram e direitos reservados.
+1. **Capa** com paisagem (ou a foto de capa), selo "Reservas abertas", título, "Consultar disponibilidade" e "Conheça nosso espaço", nota do Google e o cartão **Consulte sua data**. Nesse cartão o visitante escolhe hospedagem (até 20) ou passar o dia (até 30), as datas e o número de pessoas, e o WhatsApp abre com tudo escrito.
+2. **Faixa de números**: 20 para dormir, 30 para o dia, cerca de 70 km de São Paulo e a nota 5,0 no Google.
+3. **Conheça o Recanto**: foto (Imagem 01), texto, lista de destaques e "Quero reservar".
+4. **Nosso espaço**: cards de hospedagem, dia, finais de semana, feriados e ambiente reservado.
+5. **Para cada ocasião**: encontro de família, fim de semana com amigos, aniversários e comemorações, e feriadão. Cada um abre o WhatsApp com a ocasião escrita.
+6. **Galeria** com 7 espaços de foto em mosaico; as fotos reais abrem ampliadas.
+7. **Capacidade e locação**: 20 e 30 em destaque, "Como reservar" em 3 passos e "Consultar datas disponíveis".
+8. **Próximos feriados** ([src/data/feriados.ts](src/data/feriados.ts)): os 6 próximos, com o período do feriadão. Os que já passaram somem sozinhos. Tocar num feriado abre o WhatsApp com a data.
+9. **Localização**: endereço, distância, mapa do Google (o pino cai no Recanto Vó Tereza) e rota.
+10. **Contato e reservas**: WhatsApp e Instagram.
+11. **Rodapé**: nome, endereço, WhatsApp, Instagram e direitos reservados.
 
-Também tem menu fixo (com menu de celular), rolagem suave, animações leves, botão flutuante do WhatsApp, identidade visual própria (logotipo em SVG: serra, árvore e água) e SEO básico. O SEO inclui título e descrição, imagem de prévia para WhatsApp e redes sociais, dados estruturados de hospedagem (schema.org `LodgingBusiness`), `sitemap.xml` e `robots.txt`.
+No celular, depois da capa, uma barra fixa embaixo mostra "Consultar datas" e o WhatsApp; antes dela, e no computador, fica o botão flutuante do WhatsApp. Também tem menu fixo, rolagem suave, animações leves, identidade visual própria (logotipo em SVG) e SEO básico. O SEO inclui título, descrição, imagem de prévia, dados estruturados `LodgingBusiness`, `sitemap.xml` e `robots.txt`.
 
-Não há preços, comodidades nem serviços inventados: só o que foi informado (capacidade, locação em fins de semana e feriados, endereço e contatos).
+**Enquanto não há fotos reais**, cada espaço mostra uma **paisagem ilustrada** (céu, serra, mata e lago, em horários diferentes) com a etiqueta da foto no canto, por exemplo "Foto 01 – Fachada e entrada". É claramente uma ilustração e não mostra nenhuma instalação da chácara. Ao salvar a foto real, ela entra no lugar.
+
+**Só informações confirmadas**: não há preços nem comodidades inventadas. Fora do briefing entraram três dados públicos, que dá para mudar em [src/data/site.ts](src/data/site.ts):
+- a nota do Google, 5,0 com 5 avaliações, vista em 23/11/2026; `avaliacaoGoogle: null` esconde o selo;
+- a distância aproximada de São Paulo;
+- os feriados nacionais.
 
 ## Onde editar
 
 | O quê | Arquivo |
 |---|---|
-| Nome, descrição, endereço, capacidade, WhatsApp, Instagram, mensagens prontas do WhatsApp | [src/data/site.ts](src/data/site.ts) |
+| Nome, descrição, endereço, capacidade, WhatsApp, Instagram, mensagens prontas, nota do Google, distância | [src/data/site.ts](src/data/site.ts) |
 | Lista dos espaços de foto (nomes dos arquivos e legendas) | [src/data/fotos.ts](src/data/fotos.ts) |
+| Próximos feriados | [src/data/feriados.ts](src/data/feriados.ts) |
 | Textos e seções | [src/app/page.tsx](src/app/page.tsx) |
 | Cores e fontes | [src/app/globals.css](src/app/globals.css) |
 | Logotipo | [src/components/logo.tsx](src/components/logo.tsx) e [src/app/icon.svg](src/app/icon.svg) (ícone da aba) |
 
 ## Como colocar as fotos reais
 
-Salve as fotos em `public/fotos/` com estes nomes (pode ser `.jpg`, `.jpeg`, `.png` ou `.webp`) e gere o site de novo. Enquanto uma foto não existir, aparece um espaço reservado identificado, nunca uma imagem quebrada.
+Salve as fotos em `public/fotos/` com estes nomes (pode ser `.jpg`, `.jpeg`, `.png` ou `.webp`) e gere o site de novo. Enquanto uma foto não existir, aparece a paisagem ilustrada com a etiqueta da foto, nunca uma imagem quebrada.
 
 | Arquivo | Onde aparece | Formato sugerido |
 |---|---|---|
@@ -66,6 +75,7 @@ No Git Bash do Windows, prefixe com `MSYS_NO_PATHCONV=1`. Depois copie o conteú
 - `tsc`, ESLint e `next build` sem erros.
 - No Chrome: sem erros no console e sem requisições com falha. Sem rolagem horizontal em 320, 360, 375, 414, 768, 1024, 1280 e 1920 px.
 - Estrutura: um H1, títulos sem saltos de nível, nenhum id repetido, nenhuma âncora quebrada, todos os links externos com `noopener`.
-- Os 8 botões e links de WhatsApp vão para `wa.me/5511989855865` com mensagem pronta. O Instagram vai para `instagram.com/chacararecantovotereza`.
+- Os 20 botões e links de WhatsApp vão para `wa.me/5511989855865` com mensagem pronta. O Instagram vai para `instagram.com/chacararecantovotereza`.
 - Menu de celular abre e fecha ao escolher uma seção. A galeria foi testada com duas fotos temporárias: amplia, passa com as setas e com o teclado, e fecha com Esc.
 - O mapa carrega com o pino em "Recanto Vó Tereza".
+- Cartão de reserva: limita a 20 pessoas na hospedagem e 30 no dia, e a mensagem sai com tipo, datas (com dia da semana) e pessoas. Os feriados abrem o WhatsApp com o período, e a barra fixa do celular aparece depois da capa.

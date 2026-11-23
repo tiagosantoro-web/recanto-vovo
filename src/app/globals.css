@@ -43,6 +43,29 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+/* Paisagem ilustrada: nuvens que passam, sol que "respira" e brilho na água. */
+@keyframes nuvens {
+  from { transform: translateX(-60px); }
+  to { transform: translateX(60px); }
+}
+@keyframes sol-respira {
+  from { opacity: 0.75; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1.04); }
+}
+@keyframes brilho-agua {
+  from { opacity: 0.2; }
+  to { opacity: 0.6; }
+}
+.nuvens {
+  animation: nuvens 22s ease-in-out infinite alternate;
+}
+.sol-respira {
+  transform-origin: 1120px 560px;
+  animation: sol-respira 6s ease-in-out infinite alternate;
+}
+.brilho-agua {
+  animation: brilho-agua 3s ease-in-out infinite alternate;
+}
 
 @layer base {
   html {
@@ -89,19 +112,6 @@
     height: 1px;
     background: currentColor;
     opacity: 0.6;
-  }
-  /* Espaço reservado para foto: tom de mata e céu com linhas de relevo. */
-  .placeholder-photo {
-    background:
-      radial-gradient(120% 80% at 20% 0%, rgb(156 195 216 / 0.55), transparent 60%),
-      radial-gradient(90% 70% at 100% 100%, rgb(61 107 80 / 0.35), transparent 65%),
-      linear-gradient(160deg, #e9f1ee, #d6e5dc);
-  }
-  .placeholder-photo-dark {
-    background:
-      radial-gradient(90% 70% at 15% 10%, rgb(42 91 122 / 0.55), transparent 60%),
-      radial-gradient(80% 70% at 90% 90%, rgb(61 107 80 / 0.55), transparent 65%),
-      linear-gradient(170deg, #1d3a2e, #132a21);
   }
   .hero-zoom {
     animation: slow-zoom 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
