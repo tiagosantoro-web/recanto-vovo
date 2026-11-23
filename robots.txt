@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://tiagosantoro-web.github.io/recanto-vo-tereza/sitemap.xml
+Sitemap: https://tiagosantoro-web.github.io/recanto-vovo/sitemap.xml
