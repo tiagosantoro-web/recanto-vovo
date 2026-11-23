@@ -41,7 +41,7 @@ export const site = {
   distanciaSP: "cerca de 70 km de São Paulo",
 
   // Endereço público do site (sem barra no final). Usado no Google e na prévia de links.
-  siteUrl: "https://tiagosantoro-web.github.io/recanto-vo-tereza",
+  siteUrl: "https://tiagosantoro-web.github.io/recanto-vovo",
 };
 
 export const linkGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Recanto Vó Tereza, Mairinque - SP")}`;

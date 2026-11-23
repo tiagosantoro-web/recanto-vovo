@@ -62,10 +62,10 @@ npm run dev          # visualizar em http://localhost:3000
 npm run build        # gera a pasta out/ (site estático)
 ```
 
-Para o GitHub Pages (repositório `recanto-vo-tereza`), gere com o caminho do repositório:
+Para o GitHub Pages (repositório `tiagosantoro-web/recanto-vovo`), gere com o caminho do repositório:
 
 ```bash
-BASE_PATH=/recanto-vo-tereza npm run build
+BASE_PATH=/recanto-vovo npm run build
 ```
 
 No Git Bash do Windows, prefixe com `MSYS_NO_PATHCONV=1`. Depois copie o conteúdo de `out/` para o ramo `gh-pages`, junto com um arquivo vazio `.nojekyll`, e envie. Se o site ganhar um domínio próprio, troque `siteUrl` em `src/data/site.ts` e gere sem `BASE_PATH`.
