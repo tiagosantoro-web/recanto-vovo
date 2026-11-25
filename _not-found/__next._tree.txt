@@ -1,4 +1,4 @@
-:HL["/recanto-vovo/_next/static/chunks/36073_gpr_xfc.css","style"]
+:HL["/recanto-vovo/_next/static/chunks/05ag6gogznzs6.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":64,"c":"$Q2"}]]
-0:{"b":"L94g-P2JT0jGiP4A6CPgM","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"KoFW53VgV6NXtMp4lmOuS","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
