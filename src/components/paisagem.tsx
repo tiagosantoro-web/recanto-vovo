@@ -111,7 +111,8 @@ export function Paisagem({ clima = "amanhecer", className = "", animada = false 
           ))
         : null}
       <circle cx="1120" cy="560" r="420" fill={`url(#${id}-brilho)`} className={animada ? "sol-respira" : undefined} />
-      <circle cx="1120" cy="560" r={noite ? 46 : 64} style={{ fill: p.sol }} opacity={noite ? 0.9 : 0.95} />
+      {/* Na capa, o sol animado vem de ceu-animado.tsx; aqui fica só o brilho no horizonte. */}
+      {!animada ? <circle cx="1120" cy="560" r={noite ? 46 : 64} style={{ fill: p.sol }} opacity={noite ? 0.9 : 0.95} /> : null}
 
       {/* Nuvens */}
       {!noite ? (
