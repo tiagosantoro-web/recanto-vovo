@@ -54,23 +54,34 @@
   --font-nome: var(--font-script), cursive;
   --barrado-a: #c92a66;
   --barrado-b: #ffc93c;
+  --veu: 0.75;
 }
+/* Pôr do sol: magenta, laranja, amarelo-sol e roxo do anoitecer. Alegre e vibrante. */
 [data-tema="por-do-sol"] {
-  --color-mist: #fdf3e7;
-  --color-line: #efd8c0;
-  --color-sage: #fbe3c9;
-  --color-sage-deep: #f0b27a;
-  --color-leaf: #c2410c;
-  --color-forest: #7c2d12;
-  --color-forest-deep: #3d1608;
-  --color-lake: #0f7c80;
-  --color-lake-soft: #d6efee;
-  --color-sky: #ffc14d;
-  --color-ink: #2a1a12;
-  --color-muted: #73574a;
+  --color-mist: #fff5e1;
+  --color-paper: #ffffff;
+  --color-line: #ffd6a8;
+  --color-sage: #ffe7bd;
+  --color-sage-deep: #ffb547;
+  --color-leaf: #d63a0f;
+  --color-forest: #c2185b;
+  --color-forest-deep: #4a1259;
+  --color-lake: #7b1fa2;
+  --color-lake-soft: #f6e3fb;
+  --color-sky: #ffd23f;
+  --color-ink: #2d1030;
+  --color-muted: #7a4b5c;
   --font-nome: var(--font-script), cursive;
-  --barrado-a: #c2410c;
-  --barrado-b: #ffc14d;
+  --barrado-a: #ff5a1f;
+  --barrado-b: #ffd23f;
+  --veu: 0.55;
+}
+/* Faixa de capacidade em degradê de pôr do sol, no lugar da cor chapada. */
+[data-tema="por-do-sol"] #capacidade {
+  background: linear-gradient(135deg, #4a1259 0%, #c2185b 45%, #ff5a1f 80%, #ffb300 100%);
+}
+[data-tema="por-do-sol"] #capacidade > .veu-faixa {
+  opacity: 0.35;
 }
 [data-tema="mata-viva"] {
   --color-mist: #f1fbf4;
@@ -88,6 +99,12 @@
   --font-nome: var(--font-script), cursive;
   --barrado-a: #0b7f41;
   --barrado-b: #ffd23f;
+  --veu: 0.75;
+}
+
+/* Véu escuro sobre as paisagens: mais leve nos temas vivos, para as cores aparecerem. */
+.veu {
+  opacity: var(--veu, 1);
 }
 
 /*

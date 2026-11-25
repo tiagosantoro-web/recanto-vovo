@@ -9,7 +9,7 @@
 export const temas = [
   { id: "original", nome: "Original", descricao: "Verde da mata e azul do lago, tons suaves", amostra: ["#1d3a2e", "#3d6b50", "#2a5b7a", "#9cc3d8"] },
   { id: "chita", nome: "Chita da Vó", descricao: "Vinho, rosa, turquesa e amarelo, como tecido de chita", amostra: ["#5e1027", "#c92a66", "#0e8577", "#ffc93c"] },
-  { id: "por-do-sol", nome: "Pôr do sol", descricao: "Terracota, laranja e mostarda com azul-petróleo", amostra: ["#3d1608", "#c2410c", "#0f7c80", "#ffc14d"] },
+  { id: "por-do-sol", nome: "Pôr do sol", descricao: "Magenta, laranja, amarelo-sol e roxo: alegre e vibrante", amostra: ["#7b1fa2", "#c2185b", "#ff5a1f", "#ffd23f"] },
   { id: "mata-viva", nome: "Mata viva", descricao: "Verde intenso, azul piscina e amarelo sol", amostra: ["#063b26", "#0b7f41", "#0a7cc2", "#ffd23f"] },
 ] as const;
 
@@ -32,11 +32,11 @@ const paisagens: Partial<Record<TemaId, PaletaTema>> = {
     noite: { ceu0: "#1d0a1a", ceu1: "#4a1235", ceu2: "#7a2450", sol: "#fff3e0", brilho: "#ffc93c", serra: "#3a0f2c", lago: "#6e1f45", colina: "#2a0d22", mata: "#200a1a", frente: "#14060f" },
   },
   "por-do-sol": {
-    terra: { colina: "#7a8f3a", mata: "#55702c", frente: "#3d1608" },
-    amanhecer: { ceu0: "#0f7c80", ceu1: "#f0b27a", ceu2: "#ffd9a0", sol: "#fff4dc", brilho: "#ffc14d", serra: "#c98a5e", lago: "#9fd3d0" },
-    dia: { ceu0: "#1f8fa0", ceu1: "#8fd0d6", ceu2: "#fff0d0", sol: "#ffffff", brilho: "#ffe2a0", serra: "#6fb0b5", lago: "#a5dcdc" },
-    entardecer: { ceu0: "#3d1608", ceu1: "#e2582b", ceu2: "#ffc14d", sol: "#fff0c8", brilho: "#ffa040", serra: "#9c3d1a", lago: "#f0a06a" },
-    noite: { ceu0: "#120a14", ceu1: "#2c1830", ceu2: "#5a2c2a", sol: "#fff3e0", brilho: "#ffc14d", serra: "#2a1418", lago: "#4a2a2a", colina: "#24140f", mata: "#1a0e0a", frente: "#0f0805" },
+    terra: { colina: "#f0631c", mata: "#c2185b", frente: "#4a1259" },
+    amanhecer: { ceu0: "#ff3d7f", ceu1: "#ff9a3c", ceu2: "#ffe066", sol: "#fffbe0", brilho: "#ffd23f", serra: "#ff6f91", lago: "#ffc48a" },
+    dia: { ceu0: "#ff7a00", ceu1: "#ffc425", ceu2: "#fff6a8", sol: "#ffffff", brilho: "#fff176", serra: "#ff8a50", lago: "#ffe082" },
+    entardecer: { ceu0: "#6a1b9a", ceu1: "#ff2e63", ceu2: "#ffb300", sol: "#fff3c4", brilho: "#ff9100", serra: "#c2185b", lago: "#ff8a65" },
+    noite: { ceu0: "#2a0845", ceu1: "#6a1b9a", ceu2: "#d81b60", sol: "#fff3e0", brilho: "#ffd23f", serra: "#4a148c", lago: "#8e24aa", colina: "#3a0d4a", mata: "#2a0838", frente: "#1a0524" },
   },
   "mata-viva": {
     terra: { colina: "#22b05a", mata: "#0f8a45", frente: "#063b26" },

@@ -95,7 +95,7 @@ export default function Home() {
             <Foto espaco={fotoCapa} src={fotos[fotoCapa.arquivo]} prioridade animada etiqueta="nenhuma" />
           </div>
           <div
-            className="absolute inset-0 -z-10 bg-gradient-to-b from-forest-deep/55 via-forest-deep/25 to-forest-deep/85 lg:bg-gradient-to-r lg:from-forest-deep/85 lg:via-forest-deep/45 lg:to-forest-deep/10"
+            className="veu absolute inset-0 -z-10 bg-gradient-to-b from-forest-deep/55 via-forest-deep/25 to-forest-deep/85 lg:bg-gradient-to-r lg:from-forest-deep/85 lg:via-forest-deep/45 lg:to-forest-deep/10"
             aria-hidden
           />
           <div className="mx-auto grid min-h-[100svh] max-w-6xl items-center gap-10 px-5 pt-28 pb-14 sm:px-8 lg:grid-cols-[1.25fr_minmax(0,25rem)] lg:gap-14 lg:pt-32 lg:pb-20">
@@ -243,7 +243,7 @@ export default function Home() {
               <Reveal as="li" delay={180} className="h-full">
                 <div className="relative isolate flex h-full min-h-56 flex-col justify-between overflow-hidden rounded-3xl p-7 text-white">
                   <Paisagem clima="entardecer" className="absolute inset-0 -z-10 size-full" />
-                  <div className="absolute inset-0 -z-10 bg-forest-deep/45" />
+                  <div className="veu absolute inset-0 -z-10 bg-forest-deep/45" />
                   <p className="font-display text-3xl leading-tight font-semibold">Sua próxima reunião de família começa aqui.</p>
                   <a
                     href={disponibilidade}
@@ -279,7 +279,7 @@ export default function Home() {
                     className="group relative isolate flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-[1.75rem] p-6 text-white shadow-soft sm:aspect-[4/5]"
                   >
                     <Paisagem clima={ocasiao.clima} className="absolute inset-0 -z-20 size-full transition-transform duration-700 group-hover:scale-110" />
-                    <div className="absolute inset-0 -z-10 bg-gradient-to-t from-forest-deep/90 via-forest-deep/30 to-transparent" />
+                    <div className="veu absolute inset-0 -z-10 bg-gradient-to-t from-forest-deep/90 via-forest-deep/30 to-transparent" />
                     <h3 className="font-display text-3xl leading-tight font-semibold">{ocasiao.titulo}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-white/85">{ocasiao.texto}</p>
                     <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-white">
@@ -320,7 +320,7 @@ export default function Home() {
         {/* SEÇÃO 5 – CAPACIDADE E LOCAÇÃO */}
         <section id="capacidade" className="relative isolate overflow-hidden bg-forest py-20 text-white sm:py-28">
           <Paisagem clima="noite" className="absolute inset-0 -z-20 size-full opacity-40" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-forest/95 via-forest/80 to-forest/95" />
+          <div className="veu-faixa absolute inset-0 -z-10 bg-gradient-to-b from-forest/95 via-forest/80 to-forest/95" />
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <Reveal className="max-w-2xl">
               <p className="eyebrow text-sky">Capacidade e locação</p>
@@ -442,7 +442,7 @@ export default function Home() {
           <Reveal className="mx-auto max-w-6xl">
             <div className="relative isolate overflow-hidden rounded-[2.5rem] px-6 py-16 text-center text-white sm:px-12 sm:py-24">
               <Paisagem clima="entardecer" animada className="absolute inset-0 -z-20 size-full" />
-              <div className="absolute inset-0 -z-10 bg-gradient-to-b from-forest-deep/70 via-forest-deep/45 to-forest-deep/80" />
+              <div className="veu absolute inset-0 -z-10 bg-gradient-to-b from-forest-deep/70 via-forest-deep/45 to-forest-deep/80" />
               <UsersIcon className="mx-auto size-9 text-white/80" />
               <h2 className="mx-auto mt-4 max-w-3xl font-display text-4xl leading-[1.05] font-semibold text-balance sm:text-6xl">
                 Vamos planejar seu próximo momento especial?
