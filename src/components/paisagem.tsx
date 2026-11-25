@@ -65,7 +65,19 @@ const ARVORES: { x: number; y: number; r: number; tipo: "copa" | "pinheiro" }[] 
 ];
 
 export function Paisagem({ clima = "amanhecer", className = "", animada = false }: { clima?: Clima; className?: string; animada?: boolean }) {
-  const p = PALETAS[clima];
+  const base = PALETAS[clima];
+  // Cada cor pode ser trocada pelo tema ativo (variáveis --pz-... geradas em src/data/temas.ts).
+  const v = (campo: string, padrao: string) => `var(--pz-${clima}-${campo}, ${padrao})`;
+  const p = {
+    ceu: [v("ceu0", base.ceu[0]), v("ceu1", base.ceu[1]), v("ceu2", base.ceu[2])],
+    sol: v("sol", base.sol),
+    brilho: v("brilho", base.brilho),
+    serra: v("serra", base.serra),
+    colina: v("colina", base.colina),
+    mata: v("mata", base.mata),
+    frente: v("frente", base.frente),
+    lago: v("lago", base.lago),
+  };
   // Id único por desenho: a mesma paisagem aparece várias vezes na página.
   const id = `p-${clima}-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
   const noite = clima === "noite";
@@ -73,21 +85,21 @@ export function Paisagem({ clima = "amanhecer", className = "", animada = false 
     <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden>
       <defs>
         <linearGradient id={`${id}-ceu`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor={p.ceu[0]} />
-          <stop offset="0.55" stopColor={p.ceu[1]} />
-          <stop offset="0.78" stopColor={p.ceu[2]} />
+          <stop offset="0" style={{ stopColor: p.ceu[0] }} />
+          <stop offset="0.55" style={{ stopColor: p.ceu[1] }} />
+          <stop offset="0.78" style={{ stopColor: p.ceu[2] }} />
         </linearGradient>
         <radialGradient id={`${id}-brilho`} cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" stopColor={p.brilho} stopOpacity="0.85" />
-          <stop offset="1" stopColor={p.brilho} stopOpacity="0" />
+          <stop offset="0" style={{ stopColor: p.brilho }} stopOpacity="0.85" />
+          <stop offset="1" style={{ stopColor: p.brilho }} stopOpacity="0" />
         </radialGradient>
         <linearGradient id={`${id}-lago`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor={p.lago} />
-          <stop offset="1" stopColor={p.serra} />
+          <stop offset="0" style={{ stopColor: p.lago }} />
+          <stop offset="1" style={{ stopColor: p.serra }} />
         </linearGradient>
         <linearGradient id={`${id}-nevoa`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor={p.ceu[2]} stopOpacity="0" />
-          <stop offset="1" stopColor={p.ceu[2]} stopOpacity="0.55" />
+          <stop offset="0" style={{ stopColor: p.ceu[2] }} stopOpacity="0" />
+          <stop offset="1" style={{ stopColor: p.ceu[2] }} stopOpacity="0.55" />
         </linearGradient>
       </defs>
 
@@ -99,7 +111,7 @@ export function Paisagem({ clima = "amanhecer", className = "", animada = false 
           ))
         : null}
       <circle cx="1120" cy="560" r="420" fill={`url(#${id}-brilho)`} className={animada ? "sol-respira" : undefined} />
-      <circle cx="1120" cy="560" r={noite ? 46 : 64} fill={p.sol} opacity={noite ? 0.9 : 0.95} />
+      <circle cx="1120" cy="560" r={noite ? 46 : 64} style={{ fill: p.sol }} opacity={noite ? 0.9 : 0.95} />
 
       {/* Nuvens */}
       {!noite ? (
@@ -113,7 +125,7 @@ export function Paisagem({ clima = "amanhecer", className = "", animada = false 
 
       {/* Pássaros */}
       {!noite ? (
-        <g fill="none" stroke={p.frente} strokeWidth="3" strokeLinecap="round" opacity="0.45">
+        <g fill="none" style={{ stroke: p.frente }} strokeWidth="3" strokeLinecap="round" opacity="0.45">
           <path d="M860 300q12-12 24 0q12-12 24 0" />
           <path d="M920 340q9-9 18 0q9-9 18 0" />
           <path d="M800 350q8-8 16 0q8-8 16 0" />
@@ -121,11 +133,11 @@ export function Paisagem({ clima = "amanhecer", className = "", animada = false 
       ) : null}
 
       {/* Serra ao fundo */}
-      <path d="M0 640 180 520 300 585 470 450 640 590 780 520 930 600 1100 470 1280 590 1440 510 1600 600V1000H0Z" fill={p.serra} opacity="0.85" />
+      <path d="M0 640 180 520 300 585 470 450 640 590 780 520 930 600 1100 470 1280 590 1440 510 1600 600V1000H0Z" style={{ fill: p.serra }} opacity="0.85" />
       <rect y="560" width="1600" height="200" fill={`url(#${id}-nevoa)`} />
 
       {/* Colinas */}
-      <path d="M0 720C180 650 330 690 500 660S820 600 1000 655 1340 640 1600 690V1000H0Z" fill={p.colina} />
+      <path d="M0 720C180 650 330 690 500 660S820 600 1000 655 1340 640 1600 690V1000H0Z" style={{ fill: p.colina }} />
 
       {/* Lago com reflexo */}
       <path d="M380 800C600 770 1000 770 1240 800 1180 850 460 860 380 800Z" fill={`url(#${id}-lago)`} opacity="0.95" />
@@ -134,12 +146,12 @@ export function Paisagem({ clima = "amanhecer", className = "", animada = false 
       </g>
 
       {/* Mata */}
-      <path d="M0 790C200 750 300 800 420 790S520 840 380 860 0 880 0 880Z" fill={p.mata} />
-      <path d="M1600 780C1420 750 1320 800 1220 795S1140 850 1260 865 1600 880 1600 880Z" fill={p.mata} />
-      <path d="M0 900C300 850 520 880 800 870S1300 850 1600 890V1000H0Z" fill={p.frente} />
+      <path d="M0 790C200 750 300 800 420 790S520 840 380 860 0 880 0 880Z" style={{ fill: p.mata }} />
+      <path d="M1600 780C1420 750 1320 800 1220 795S1140 850 1260 865 1600 880 1600 880Z" style={{ fill: p.mata }} />
+      <path d="M0 900C300 850 520 880 800 870S1300 850 1600 890V1000H0Z" style={{ fill: p.frente }} />
 
       {/* Árvores */}
-      <g fill={p.frente}>
+      <g style={{ fill: p.frente }}>
         {ARVORES.map((a) =>
           a.tipo === "copa" ? (
             <g key={a.x}>

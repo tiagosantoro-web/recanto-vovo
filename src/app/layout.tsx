@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Cormorant_Garamond, Dancing_Script, Manrope } from "next/font/google";
+import { SeletorCores } from "@/components/seletor-cores";
 import { site } from "@/data/site";
+import { cssPaisagens, temaPadrao, temas } from "@/data/temas";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -13,6 +15,16 @@ const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
 });
+
+// Letra cursiva para o nome "Vó Tereza" nos temas vivos.
+const script = Dancing_Script({
+  variable: "--font-script",
+  subsets: ["latin"],
+  weight: ["600", "700"],
+});
+
+// Aplica ?tema=... antes de a página aparecer, sem piscar a paleta padrão.
+const scriptTema = `try{var t=new URLSearchParams(location.search).get("tema");if(${JSON.stringify(temas.map((t) => t.id))}.indexOf(t)>-1)document.documentElement.dataset.tema=t}catch(e){}`;
 
 const titulo = `${site.nome} | Chácara para locação em ${site.endereco.cidade} – ${site.endereco.estado}`;
 const descricao = `${site.descricao} Hospedagem para até ${site.capacidade.pernoite} pessoas e até ${site.capacidade.dia} pessoas durante o dia, em ${site.endereco.cidade} (SP). Finais de semana e feriados.`;
@@ -62,9 +74,19 @@ const dadosEstruturados = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${cormorant.variable} ${manrope.variable} antialiased`}>
+    <html
+      lang="pt-BR"
+      data-tema={temaPadrao}
+      suppressHydrationWarning
+      className={`${cormorant.variable} ${manrope.variable} ${script.variable} antialiased`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: scriptTema }} />
+        <style dangerouslySetInnerHTML={{ __html: cssPaisagens }} />
+      </head>
       <body className="min-h-dvh">
         {children}
+        <SeletorCores />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dadosEstruturados) }} />
       </body>
     </html>

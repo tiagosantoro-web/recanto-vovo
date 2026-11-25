@@ -150,6 +150,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Barrado de crochê (só nos temas vivos) */}
+        <div className="barrado bg-white" aria-hidden />
+
         {/* Faixa de números */}
         <section aria-label="O Recanto em números" className="border-b border-line bg-white">
           <ul className="mx-auto grid max-w-6xl grid-cols-2 divide-line px-5 sm:px-8 lg:grid-cols-4 lg:divide-x">
@@ -474,6 +477,7 @@ export default function Home() {
 
       {/* SEÇÃO 8 – RODAPÉ */}
       <footer className="bg-forest-deep pb-20 text-white sm:pb-0">
+        <div className="barrado bg-mist" aria-hidden />
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <Logo tom="claro" />

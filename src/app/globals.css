@@ -19,6 +19,8 @@
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-cormorant), ui-serif, Georgia, serif;
+  /* Fonte do nome "Vó Tereza" no logotipo: muda nos temas vivos (letra cursiva). */
+  --font-nome: var(--font-cormorant), ui-serif, Georgia, serif;
 
   --shadow-soft: 0 1px 2px rgb(23 37 30 / 0.04), 0 12px 32px -16px rgb(23 37 30 / 0.22);
   --shadow-lift: 0 2px 6px rgb(23 37 30 / 0.06), 0 28px 50px -24px rgb(23 37 30 / 0.4);
@@ -29,6 +31,80 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: none; }
   }
+}
+
+/*
+  TEMAS DE CORES MAIS VIVOS (veja src/data/temas.ts).
+  Cada bloco troca as mesmas variáveis da paleta original; o verde do WhatsApp não muda,
+  para o botão continuar reconhecível.
+*/
+[data-tema="chita"] {
+  --color-mist: #fff7ec;
+  --color-line: #f3dcc4;
+  --color-sage: #ffe6cc;
+  --color-sage-deep: #f3a8b8;
+  --color-leaf: #c92a66;
+  --color-forest: #9e1b3a;
+  --color-forest-deep: #5e1027;
+  --color-lake: #0e8577;
+  --color-lake-soft: #d3f2ec;
+  --color-sky: #ffc93c;
+  --color-ink: #2b1418;
+  --color-muted: #765652;
+  --font-nome: var(--font-script), cursive;
+  --barrado-a: #c92a66;
+  --barrado-b: #ffc93c;
+}
+[data-tema="por-do-sol"] {
+  --color-mist: #fdf3e7;
+  --color-line: #efd8c0;
+  --color-sage: #fbe3c9;
+  --color-sage-deep: #f0b27a;
+  --color-leaf: #c2410c;
+  --color-forest: #7c2d12;
+  --color-forest-deep: #3d1608;
+  --color-lake: #0f7c80;
+  --color-lake-soft: #d6efee;
+  --color-sky: #ffc14d;
+  --color-ink: #2a1a12;
+  --color-muted: #73574a;
+  --font-nome: var(--font-script), cursive;
+  --barrado-a: #c2410c;
+  --barrado-b: #ffc14d;
+}
+[data-tema="mata-viva"] {
+  --color-mist: #f1fbf4;
+  --color-line: #cfeedb;
+  --color-sage: #d9f6e3;
+  --color-sage-deep: #7fd3a0;
+  --color-leaf: #0b7f41;
+  --color-forest: #0a5a37;
+  --color-forest-deep: #063b26;
+  --color-lake: #0a72b5;
+  --color-lake-soft: #dcefff;
+  --color-sky: #ffd23f;
+  --color-ink: #0d2419;
+  --color-muted: #4a695a;
+  --font-nome: var(--font-script), cursive;
+  --barrado-a: #0b7f41;
+  --barrado-b: #ffd23f;
+}
+
+/*
+  Barrado: faixa com bicos arredondados, como a barra de uma toalha de crochê da vó.
+  Só aparece nos temas vivos.
+*/
+.barrado {
+  display: none;
+}
+[data-tema="chita"] .barrado,
+[data-tema="por-do-sol"] .barrado,
+[data-tema="mata-viva"] .barrado {
+  display: block;
+  height: 14px;
+  background:
+    radial-gradient(circle at 12px 0, var(--barrado-b) 6px, transparent 6.5px) 0 0 / 24px 14px repeat-x,
+    radial-gradient(circle at 12px 0, var(--barrado-a) 12px, transparent 12.5px) 0 0 / 24px 14px repeat-x;
 }
 
 @keyframes slow-zoom {
