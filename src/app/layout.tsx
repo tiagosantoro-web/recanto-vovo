@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Dancing_Script, Manrope } from "next/font/google";
-import { SeletorCores } from "@/components/seletor-cores";
+import { PaisagensBase } from "@/components/paisagem";
+import { SeletorCoresSobDemanda } from "@/components/seletor-cores-sob-demanda";
 import { linkGoogleMaps, site } from "@/data/site";
 import { cssPaisagens, temaPadrao, temas } from "@/data/temas";
 import "./globals.css";
@@ -8,7 +9,8 @@ import "./globals.css";
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  // Só o peso usado nos títulos (font-semibold).
+  weight: ["600"],
 });
 
 const manrope = Manrope({
@@ -20,7 +22,7 @@ const manrope = Manrope({
 const script = Dancing_Script({
   variable: "--font-script",
   subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: ["600"],
 });
 
 // Aplica ?tema=... antes de a página aparecer, sem piscar a paleta padrão.
@@ -114,8 +116,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <style dangerouslySetInnerHTML={{ __html: cssPaisagens }} />
       </head>
       <body className="min-h-dvh">
+        <PaisagensBase />
         {children}
-        <SeletorCores />
+        <SeletorCoresSobDemanda />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dadosEstruturados) }} />
       </body>
     </html>

@@ -64,7 +64,8 @@ const ARVORES: { x: number; y: number; r: number; tipo: "copa" | "pinheiro" }[] 
   { x: 1565, y: 915, r: 65, tipo: "copa" },
 ];
 
-export function Paisagem({ clima = "amanhecer", className = "", animada = false }: { clima?: Clima; className?: string; animada?: boolean }) {
+/** O desenho em si (sem o <svg> de fora), para ser usado inteiro ou como base reaproveitável. */
+function Desenho({ clima, animada, id }: { clima: Clima; animada: boolean; id: string }) {
   const base = PALETAS[clima];
   // Cada cor pode ser trocada pelo tema ativo (variáveis --pz-... geradas em src/data/temas.ts).
   const v = (campo: string, padrao: string) => `var(--pz-${clima}-${campo}, ${padrao})`;
@@ -78,11 +79,9 @@ export function Paisagem({ clima = "amanhecer", className = "", animada = false 
     frente: v("frente", base.frente),
     lago: v("lago", base.lago),
   };
-  // Id único por desenho: a mesma paisagem aparece várias vezes na página.
-  const id = `p-${clima}-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
   const noite = clima === "noite";
   return (
-    <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden>
+    <>
       <defs>
         <linearGradient id={`${id}-ceu`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" style={{ stopColor: p.ceu[0] }} />
@@ -166,6 +165,37 @@ export function Paisagem({ clima = "amanhecer", className = "", animada = false 
           ),
         )}
       </g>
+    </>
+  );
+}
+
+const CLIMAS: Clima[] = ["amanhecer", "dia", "entardecer", "noite"];
+
+/**
+ * Paisagem ilustrada. As animadas (capa e contato) são desenhadas inteiras; as outras reaproveitam
+ * o desenho-base de <PaisagensBase /> com <use>, o que deixa a página bem mais leve no celular.
+ */
+export function Paisagem({ clima = "amanhecer", className = "", animada = false }: { clima?: Clima; className?: string; animada?: boolean }) {
+  // Id único por desenho: a paisagem animada pode aparecer mais de uma vez na página.
+  const id = `p-${clima}-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
+  return (
+    <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden>
+      {animada ? <Desenho clima={clima} animada id={id} /> : <use href={`#paisagem-${clima}`} />}
+    </svg>
+  );
+}
+
+/** Desenhos-base das 4 paisagens, uma vez só na página (invisível). Fica no começo do <body>. */
+export function PaisagensBase() {
+  return (
+    <svg width="0" height="0" aria-hidden focusable="false" style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }}>
+      <defs>
+        {CLIMAS.map((clima) => (
+          <g key={clima} id={`paisagem-${clima}`}>
+            <Desenho clima={clima} animada={false} id={`pb-${clima}`} />
+          </g>
+        ))}
+      </defs>
     </svg>
   );
 }
