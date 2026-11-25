@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <url>
 <loc>https://tiagosantoro-web.github.io/recanto-vovo/</loc>
+<image:image>
+<image:loc>https://tiagosantoro-web.github.io/recanto-vovo/opengraph-image.png</image:loc>
+</image:image>
+<lastmod>2026-11-25T15:01:18.729Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>1</priority>
 </url>
