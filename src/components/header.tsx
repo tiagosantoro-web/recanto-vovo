@@ -52,7 +52,7 @@ export function Header() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className={`text-sm font-semibold transition-colors ${solido ? "text-ink/75 hover:text-forest" : "text-white/85 hover:text-white"}`}
+                  className={`inline-flex min-h-11 items-center text-sm font-semibold transition-colors ${solido ? "text-ink/75 hover:text-forest" : "text-white/85 hover:text-white"}`}
                 >
                   {link.rotulo}
                 </a>

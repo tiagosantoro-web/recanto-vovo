@@ -136,7 +136,7 @@ export default function Home() {
                   href={linkGoogleMaps}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="animate-rise mt-8 inline-flex items-center gap-3 text-sm text-white/85 hover:text-white"
+                  className="animate-rise mt-8 inline-flex min-h-11 items-center gap-3 text-sm text-white/85 hover:text-white"
                   style={{ animationDelay: "400ms" }}
                 >
                   <Estrelas />

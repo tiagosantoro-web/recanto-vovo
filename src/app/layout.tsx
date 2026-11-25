@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Dancing_Script, Manrope } from "next/font/google";
 import { SeletorCores } from "@/components/seletor-cores";
-import { site } from "@/data/site";
+import { linkGoogleMaps, site } from "@/data/site";
 import { cssPaisagens, temaPadrao, temas } from "@/data/temas";
 import "./globals.css";
 
@@ -27,18 +27,24 @@ const script = Dancing_Script({
 const scriptTema = `try{var t=new URLSearchParams(location.search).get("tema");if(${JSON.stringify(temas.map((t) => t.id))}.indexOf(t)>-1)document.documentElement.dataset.tema=t}catch(e){}`;
 
 const titulo = `${site.nome} | Chácara para locação em ${site.endereco.cidade} – ${site.endereco.estado}`;
-const descricao = `${site.descricao} Hospedagem para até ${site.capacidade.pernoite} pessoas e até ${site.capacidade.dia} pessoas durante o dia, em ${site.endereco.cidade} (SP). Finais de semana e feriados.`;
+// Até ~155 caracteres, para o Google mostrar inteira.
+const descricao = `Chácara para locação em ${site.endereco.cidade} (SP): hospedagem para até ${site.capacidade.pernoite} pessoas e até ${site.capacidade.dia} durante o dia. Fins de semana e feriados. Consulte datas no WhatsApp.`;
 
 export const metadata: Metadata = {
   // Só o domínio: os caminhos gerados já incluem a subpasta do GitHub Pages.
   metadataBase: new URL("/", site.siteUrl),
   title: titulo,
   description: descricao,
-  keywords: ["chácara", "Mairinque", "locação de chácara", "hospedagem", "final de semana", "feriado", "Sebandilha", site.nome],
+  applicationName: site.nome,
+  keywords: ["chácara", "Mairinque", "locação de chácara", "chácara para alugar", "hospedagem", "final de semana", "feriado", "Sebandilha", site.nome],
   alternates: { canonical: `${site.siteUrl}/` },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
+  formatDetection: { telephone: false, address: false, email: false },
+  appleWebApp: { title: site.nome, capable: true, statusBarStyle: "black-translucent" },
+  category: "travel",
   openGraph: {
-    title: site.nome,
-    description: "Seu refúgio de tranquilidade em meio à natureza. Consulte a disponibilidade pelo WhatsApp.",
+    title: `${site.nome} – Chácara para locação em ${site.endereco.cidade} (SP)`,
+    description: `Seu refúgio de tranquilidade em meio à natureza. Até ${site.capacidade.pernoite} pessoas para dormir e ${site.capacidade.dia} durante o dia. Consulte datas pelo WhatsApp.`,
     type: "website",
     locale: "pt_BR",
     siteName: site.nome,
@@ -54,22 +60,45 @@ export const viewport: Viewport = {
 };
 
 // Dados estruturados para o Google entender que é uma hospedagem e onde fica.
+// Só dados confirmados (nada de preço, comodidades ou avaliações inventadas).
 const dadosEstruturados = {
   "@context": "https://schema.org",
-  "@type": "LodgingBusiness",
-  name: site.nome,
-  description: site.descricao,
-  url: `${site.siteUrl}/`,
-  telephone: `+${site.whatsapp}`,
-  sameAs: [`https://www.instagram.com/${site.instagram}/`],
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Rua Ayub Abib Riskallah, 38",
-    addressLocality: site.endereco.cidade,
-    addressRegion: site.endereco.estado,
-    addressCountry: "BR",
-  },
-  maximumAttendeeCapacity: site.capacidade.dia,
+  "@graph": [
+    {
+      "@type": "LodgingBusiness",
+      "@id": `${site.siteUrl}/#recanto`,
+      name: site.nome,
+      description: site.descricao,
+      url: `${site.siteUrl}/`,
+      image: `${site.siteUrl}/opengraph-image.png`,
+      logo: `${site.siteUrl}/icon.svg`,
+      telephone: `+${site.whatsapp}`,
+      sameAs: [`https://www.instagram.com/${site.instagram}/`],
+      hasMap: linkGoogleMaps,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Rua Ayub Abib Riskallah, 38",
+        addressLocality: site.endereco.cidade,
+        addressRegion: site.endereco.estado,
+        addressCountry: "BR",
+      },
+      maximumAttendeeCapacity: site.capacidade.dia,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: `+${site.whatsapp}`,
+        contactType: "reservations",
+        availableLanguage: "pt-BR",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.siteUrl}/#site`,
+      url: `${site.siteUrl}/`,
+      name: site.nome,
+      inLanguage: "pt-BR",
+      publisher: { "@id": `${site.siteUrl}/#recanto` },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
