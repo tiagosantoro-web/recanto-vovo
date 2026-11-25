@@ -16,7 +16,7 @@ export const temas = [
 export type TemaId = (typeof temas)[number]["id"];
 
 /** Tema que aparece para todos os visitantes. Troque aqui quando o cliente escolher. */
-export const temaPadrao: TemaId = "original";
+export const temaPadrao: TemaId = "por-do-sol"; // escolhido pelo cliente em 25/11/2026
 
 /* Cores da paisagem ilustrada em cada tema (o "original" usa as de src/components/paisagem.tsx). */
 type Campo = "ceu0" | "ceu1" | "ceu2" | "sol" | "brilho" | "serra" | "colina" | "mata" | "frente" | "lago";

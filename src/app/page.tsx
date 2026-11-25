@@ -1,3 +1,4 @@
+import { CeuAnimado } from "@/components/ceu-animado";
 import { ConsultaDatas } from "@/components/consulta-datas";
 import { ProximosFeriados } from "@/components/feriados";
 import { Foto } from "@/components/foto";
@@ -98,6 +99,7 @@ export default function Home() {
             className="veu absolute inset-0 -z-10 bg-gradient-to-b from-forest-deep/55 via-forest-deep/25 to-forest-deep/85 lg:bg-gradient-to-r lg:from-forest-deep/85 lg:via-forest-deep/45 lg:to-forest-deep/10"
             aria-hidden
           />
+          <CeuAnimado />
           <div className="mx-auto grid min-h-[100svh] max-w-6xl items-center gap-10 px-5 pt-28 pb-14 sm:px-8 lg:grid-cols-[1.25fr_minmax(0,25rem)] lg:gap-14 lg:pt-32 lg:pb-20">
             <div>
               <p className="animate-rise inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-xs font-bold tracking-[0.16em] uppercase backdrop-blur">

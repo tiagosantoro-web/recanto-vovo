@@ -123,8 +123,8 @@ export function Paisagem({ clima = "amanhecer", className = "", animada = false 
         </g>
       ) : null}
 
-      {/* Pássaros */}
-      {!noite ? (
+      {/* Pássaros parados (na capa, os pássaros voando vêm de ceu-animado.tsx) */}
+      {!noite && !animada ? (
         <g fill="none" style={{ stroke: p.frente }} strokeWidth="3" strokeLinecap="round" opacity="0.45">
           <path d="M860 300q12-12 24 0q12-12 24 0" />
           <path d="M920 340q9-9 18 0q9-9 18 0" />
@@ -154,14 +154,14 @@ export function Paisagem({ clima = "amanhecer", className = "", animada = false 
       <g style={{ fill: p.frente }}>
         {ARVORES.map((a) =>
           a.tipo === "copa" ? (
-            <g key={a.x}>
+            <g key={a.x} className={animada ? "balanca" : undefined}>
               <rect x={a.x - 5} y={a.y - a.r * 0.4} width="10" height={a.r * 0.9} />
               <circle cx={a.x} cy={a.y - a.r * 0.7} r={a.r * 0.55} />
               <circle cx={a.x - a.r * 0.35} cy={a.y - a.r * 0.45} r={a.r * 0.4} />
               <circle cx={a.x + a.r * 0.35} cy={a.y - a.r * 0.45} r={a.r * 0.42} />
             </g>
           ) : (
-            <path key={a.x} d={`M${a.x} ${a.y - a.r * 1.9}L${a.x + a.r * 0.5} ${a.y}H${a.x - a.r * 0.5}Z`} />
+            <path key={a.x} className={animada ? "balanca" : undefined} d={`M${a.x} ${a.y - a.r * 1.9}L${a.x + a.r * 0.5} ${a.y}H${a.x - a.r * 0.5}Z`} />
           ),
         )}
       </g>

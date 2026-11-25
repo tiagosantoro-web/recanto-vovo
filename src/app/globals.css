@@ -102,6 +102,87 @@
   --veu: 0.75;
 }
 
+/* CÉU ANIMADO DA CAPA (src/components/ceu-animado.tsx) */
+@keyframes nuvem-passa {
+  from { transform: translateX(-40vw); }
+  to { transform: translateX(110vw); }
+}
+@keyframes vento {
+  0% { transform: translateX(-30vw); opacity: 0; }
+  15% { opacity: 0.4; }
+  70% { opacity: 0.3; }
+  100% { transform: translateX(110vw); opacity: 0; }
+}
+@keyframes bando {
+  from { transform: translateX(-15vw); }
+  to { transform: translateX(115vw); }
+}
+@keyframes bando-onda {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -18px; }
+}
+@keyframes asa-esq {
+  from { transform: rotate(-28deg); }
+  to { transform: rotate(22deg); }
+}
+@keyframes asa-dir {
+  from { transform: rotate(28deg); }
+  to { transform: rotate(-22deg); }
+}
+.nuvem-passa {
+  animation: nuvem-passa linear infinite;
+}
+.vento {
+  opacity: 0;
+  animation: vento ease-in-out infinite;
+}
+.bando {
+  animation: bando linear infinite;
+}
+.bando-onda {
+  position: relative;
+  animation: bando-onda 5s ease-in-out infinite;
+}
+.asa {
+  transform-box: fill-box;
+  animation: asa-esq 0.9s ease-in-out infinite alternate;
+}
+.asa-esq {
+  transform-origin: 100% 100%;
+}
+.asa-dir {
+  transform-origin: 0% 100%;
+  animation-name: asa-dir;
+}
+/* Árvores da paisagem balançando com o vento (só na capa). */
+@keyframes balanca {
+  from { transform: rotate(-1.6deg); }
+  to { transform: rotate(1.6deg); }
+}
+.balanca {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: balanca 3.2s ease-in-out infinite alternate;
+}
+.balanca:nth-child(2n) {
+  animation-duration: 2.6s;
+  animation-delay: -1s;
+}
+.balanca:nth-child(3n) {
+  animation-duration: 3.8s;
+  animation-delay: -2s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ceu-animado .vento,
+  .ceu-animado .bando {
+    display: none;
+  }
+  .ceu-animado .nuvem-passa {
+    animation: none !important;
+    transform: translateX(calc(var(--i, 1) * 20vw));
+  }
+}
+
 /* Véu escuro sobre as paisagens: mais leve nos temas vivos, para as cores aparecerem. */
 .veu {
   opacity: var(--veu, 1);
